@@ -9,7 +9,11 @@ namespace MicroOndasDigital.Servico
 
         public ServicoMicroOndas()
         {
-            _microOndasDigital = new Dominio.MicroOndasDigital(1, 1);
+        }
+
+        public ServicoMicroOndas(int tempo, int potencia)
+        {
+            _microOndasDigital = new Dominio.MicroOndasDigital(tempo, potencia);
         }
 
         public string Cancelar()
@@ -19,12 +23,15 @@ namespace MicroOndasDigital.Servico
 
         public string InicioRapido()
         {
-            return _microOndasDigital.InicioRapido();
+            var tempo = 30;
+            var potencia = 8;
+
+            return Ligar(tempo, potencia);
         }
 
         public string Ligar(int tempo, int potencia)
         {
-            return _microOndasDigital.Ligar(1, 1);
+            return _microOndasDigital.Ligar(tempo, potencia);
         }
 
         public string Pausar()

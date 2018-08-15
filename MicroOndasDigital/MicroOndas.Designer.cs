@@ -28,20 +28,24 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.button_ligar = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
+            this.lblTempo = new System.Windows.Forms.Label();
+            this.lblPotencia = new System.Windows.Forms.Label();
             this.button_pausar = new System.Windows.Forms.Button();
             this.button_cancelar = new System.Windows.Forms.Button();
             this.txtTempo = new System.Windows.Forms.TextBox();
             this.txtPotencia = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
             this.lblMensagem = new System.Windows.Forms.Label();
+            this.tmpTempo = new System.Windows.Forms.Timer(this.components);
+            this.txtPrograma = new System.Windows.Forms.TextBox();
+            this.lblPrograma = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // button_ligar
             // 
-            this.button_ligar.Location = new System.Drawing.Point(179, 166);
+            this.button_ligar.Location = new System.Drawing.Point(167, 265);
             this.button_ligar.Name = "button_ligar";
             this.button_ligar.Size = new System.Drawing.Size(75, 23);
             this.button_ligar.TabIndex = 0;
@@ -49,27 +53,27 @@
             this.button_ligar.UseVisualStyleBackColor = true;
             this.button_ligar.Click += new System.EventHandler(this.Btn_Ligar);
             // 
-            // label1
+            // lblTempo
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(246, 88);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(40, 13);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "Tempo";
+            this.lblTempo.AutoSize = true;
+            this.lblTempo.Location = new System.Drawing.Point(246, 88);
+            this.lblTempo.Name = "lblTempo";
+            this.lblTempo.Size = new System.Drawing.Size(40, 13);
+            this.lblTempo.TabIndex = 2;
+            this.lblTempo.Text = "Tempo";
             // 
-            // label2
+            // lblPotencia
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(237, 119);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(49, 13);
-            this.label2.TabIndex = 3;
-            this.label2.Text = "Potência";
+            this.lblPotencia.AutoSize = true;
+            this.lblPotencia.Location = new System.Drawing.Point(237, 119);
+            this.lblPotencia.Name = "lblPotencia";
+            this.lblPotencia.Size = new System.Drawing.Size(49, 13);
+            this.lblPotencia.TabIndex = 3;
+            this.lblPotencia.Text = "Potência";
             // 
             // button_pausar
             // 
-            this.button_pausar.Location = new System.Drawing.Point(260, 166);
+            this.button_pausar.Location = new System.Drawing.Point(248, 265);
             this.button_pausar.Name = "button_pausar";
             this.button_pausar.Size = new System.Drawing.Size(75, 23);
             this.button_pausar.TabIndex = 5;
@@ -79,7 +83,7 @@
             // 
             // button_cancelar
             // 
-            this.button_cancelar.Location = new System.Drawing.Point(341, 166);
+            this.button_cancelar.Location = new System.Drawing.Point(329, 265);
             this.button_cancelar.Name = "button_cancelar";
             this.button_cancelar.Size = new System.Drawing.Size(75, 23);
             this.button_cancelar.TabIndex = 6;
@@ -108,7 +112,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(422, 166);
+            this.button1.Location = new System.Drawing.Point(410, 265);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(90, 23);
             this.button1.TabIndex = 9;
@@ -123,22 +127,45 @@
             this.lblMensagem.Size = new System.Drawing.Size(0, 13);
             this.lblMensagem.TabIndex = 10;
             // 
+            // tmpTempo
+            // 
+            this.tmpTempo.Tick += new System.EventHandler(this.TmpTempo_Tick);
+            // 
+            // txtPrograma
+            // 
+            this.txtPrograma.Location = new System.Drawing.Point(293, 151);
+            this.txtPrograma.Name = "txtPrograma";
+            this.txtPrograma.Size = new System.Drawing.Size(100, 20);
+            this.txtPrograma.TabIndex = 11;
+            // 
+            // lblPrograma
+            // 
+            this.lblPrograma.AutoSize = true;
+            this.lblPrograma.Location = new System.Drawing.Point(237, 154);
+            this.lblPrograma.Name = "lblPrograma";
+            this.lblPrograma.Size = new System.Drawing.Size(52, 13);
+            this.lblPrograma.TabIndex = 12;
+            this.lblPrograma.Text = "Programa";
+            // 
             // MicroOndas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.lblPrograma);
+            this.Controls.Add(this.txtPrograma);
             this.Controls.Add(this.lblMensagem);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.txtPotencia);
             this.Controls.Add(this.txtTempo);
             this.Controls.Add(this.button_cancelar);
             this.Controls.Add(this.button_pausar);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.lblPotencia);
+            this.Controls.Add(this.lblTempo);
             this.Controls.Add(this.button_ligar);
             this.Name = "MicroOndas";
             this.Text = "Micro Ondas Digital";
+            this.Load += new System.EventHandler(this.MicroOndas_Load);
             this.Click += new System.EventHandler(this.Btn_InicioRapido);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -148,14 +175,17 @@
         #endregion
 
         private System.Windows.Forms.Button button_ligar;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label lblTempo;
+        private System.Windows.Forms.Label lblPotencia;
         private System.Windows.Forms.Button button_pausar;
         private System.Windows.Forms.Button button_cancelar;
         private System.Windows.Forms.TextBox txtTempo;
         private System.Windows.Forms.TextBox txtPotencia;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label lblMensagem;
+        private System.Windows.Forms.Timer tmpTempo;
+        private System.Windows.Forms.TextBox txtPrograma;
+        private System.Windows.Forms.Label lblPrograma;
     }
 }
 

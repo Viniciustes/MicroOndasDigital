@@ -8,6 +8,7 @@ namespace MicroOndasDigital
     public partial class MicroOndas : Form
     {
         private IServicoMicroOndas _servico;
+        int tempo = 10;
 
         public MicroOndas()
         {
@@ -17,6 +18,11 @@ namespace MicroOndasDigital
         private void InstanciaServico()
         {
             _servico = new ServicoMicroOndas();
+        }
+
+        private void InstanciaServico(int tempo, int potencia)
+        {
+            _servico = new ServicoMicroOndas(tempo, potencia);
         }
 
         private void Btn_Ligar(object sender, EventArgs e)
@@ -35,8 +41,8 @@ namespace MicroOndasDigital
                 return;
             }
 
-            InstanciaServico();
-            _servico.Ligar(tempo, potencia);
+            InstanciaServico(tempo, potencia);
+            lblMensagem.Text = _servico.Ligar(tempo, potencia);
         }
 
         private void Btn_Pausar(object sender, EventArgs e)
@@ -73,6 +79,26 @@ namespace MicroOndasDigital
             {
                 e.Handled = true;
             }
+        }
+
+        private void TmpTempo_Tick(object sender, EventArgs e)
+        {
+            tempo--;
+
+            lblMensagem.Text = Convert.ToString(tempo);
+
+            if (tempo == 0)
+            {
+                lblMensagem.Text = "Fim";
+                MessageBox.Show("Tempo Acabou");
+                tmpTempo.Stop();
+            }
+        }
+
+        private void MicroOndas_Load(object sender, EventArgs e)
+        {
+            tmpTempo.Start();
+            tmpTempo.Interval = 1000;
         }
     }
 }
