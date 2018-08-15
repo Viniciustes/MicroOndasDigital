@@ -1,4 +1,5 @@
 ﻿using MicroOndasDigital.Dominio.Interface;
+using MicroOndasDigital.Servico.Dtos;
 using MicroOndasDigital.Servico.Interface;
 
 namespace MicroOndasDigital.Servico
@@ -9,6 +10,7 @@ namespace MicroOndasDigital.Servico
 
         public ServicoMicroOndas()
         {
+            _microOndasDigital = new Dominio.MicroOndasDigital();
         }
 
         public ServicoMicroOndas(int tempo, int potencia)
@@ -16,27 +18,33 @@ namespace MicroOndasDigital.Servico
             _microOndasDigital = new Dominio.MicroOndasDigital(tempo, potencia);
         }
 
-        public string Cancelar()
+        public DtoMicroOndasDigital InicioRapido()
         {
-            return _microOndasDigital.Cancelar();
+            var microOndasDigital = _microOndasDigital.InicioRapido();
+            return TransformarObjetoParaDto(microOndasDigital);
         }
 
-        public string InicioRapido()
+        public DtoMicroOndasDigital Ligar(int tempo, int potencia)
         {
-            var tempo = 30;
-            var potencia = 8;
-
-            return Ligar(tempo, potencia);
+            var microOndasDigital = _microOndasDigital.Ligar(tempo,potencia);
+            return TransformarObjetoParaDto(microOndasDigital);
         }
 
-        public string Ligar(int tempo, int potencia)
+        public DtoMicroOndasDigital Pausar()
         {
-            return _microOndasDigital.Ligar(tempo, potencia);
+            var microOndasDigital = _microOndasDigital.Pausar();
+            return TransformarObjetoParaDto(microOndasDigital);
         }
 
-        public string Pausar()
+        private DtoMicroOndasDigital TransformarObjetoParaDto(Dominio.MicroOndasDigital microOndasDigital)
         {
-            return _microOndasDigital.Pausar();
+            return new DtoMicroOndasDigital()
+            {
+                Tempo = microOndasDigital.Tempo,
+                Potencia = microOndasDigital.Potencia,
+                EhValido = microOndasDigital.EhValido,
+                Mensagem = microOndasDigital.Mensagem
+            };
         }
     }
 }

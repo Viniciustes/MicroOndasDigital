@@ -2,9 +2,8 @@
 {
     public interface IMicroOndasDigital
     {
-        string Ligar(int tempo, int potencia);
-        string Cancelar();
-        string Pausar();
-        string InicioRapido();
+        MicroOndasDigital Ligar(int tempo, int potencia);
+        MicroOndasDigital Pausar();
+        MicroOndasDigital InicioRapido();
     }
 }

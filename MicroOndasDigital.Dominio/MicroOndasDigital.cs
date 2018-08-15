@@ -5,6 +5,11 @@ namespace MicroOndasDigital.Dominio
 {
     public class MicroOndasDigital : IMicroOndasDigital
     {
+        public MicroOndasDigital()
+        {
+
+        }
+
         public MicroOndasDigital(int tempo, int potencia)
         {
             Tempo = tempo;
@@ -17,39 +22,43 @@ namespace MicroOndasDigital.Dominio
 
         public int Potencia { get; }
 
-        public string InicioRapido()
+        public bool EhValido { get; private set; }
+
+        public string Mensagem { get; private set ; }
+
+        public MicroOndasDigital InicioRapido()
+        {
+            var tempo = 30;
+            var potencia = 8;
+
+            return new MicroOndasDigital(tempo, potencia);
+        }
+
+        public MicroOndasDigital Ligar(int tempo, int potencia)
+        {
+            return this;
+        }
+
+        public MicroOndasDigital Pausar()
         {
             throw new NotImplementedException();
         }
 
-        public string Cancelar()
-        {
-            throw new NotImplementedException();
-        }
-
-        public string Ligar(int tempo, int potencia)
-        {
-            return "Ligado";
-        }
-
-        public string Pausar()
-        {
-            throw new NotImplementedException();
-        }
-
-        private string Validacoes()
+        private void Validacoes()
         {
             if (Tempo < 1 || Tempo > 120)
             {
-                return "Tempo deve ser no mínimo 1 segundo ou no máximo 2 minutos.";
+                Mensagem = "Tempo deve ser no mínimo 1 segundo ou no máximo 2 minutos.";
+                return;
             }
 
             if (Potencia < 1 || Potencia > 10)
             {
-                return "Potência deve ser no mínimo 1 ou no máximo 10.";
+                Mensagem = "Potência deve ser no mínimo 1 ou no máximo 10.";
+                return;
             }
 
-            return string.Empty;
+            EhValido = true;
         }
     }
 }

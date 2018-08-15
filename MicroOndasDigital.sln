@@ -7,7 +7,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "InterfaceUsuarios", "Interf
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Dominio", "Dominio", "{CC6D2AB9-D490-4CE8-B3AF-C6BB88A70CB9}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Testes", "Testes", "{08E90DCC-DAF3-443E-A7B7-C3FA2FDA3FEB}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Teste", "Teste", "{08E90DCC-DAF3-443E-A7B7-C3FA2FDA3FEB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MicroOndasDigital", "MicroOndasDigital\MicroOndasDigital.csproj", "{1CE43C84-1326-473B-B256-422E250FC12D}"
 EndProject
@@ -16,6 +16,8 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Servico", "Servico", "{1421804D-43F8-498E-B665-B7175933EFBF}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MicroOndasDigital.Servico", "MicroOndasDigital.Servico\MicroOndasDigital.Servico.csproj", "{9DD0A909-D347-4526-B928-E8E6CD49F06B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MicroOndasDigital.Teste", "MicroOndasDigital.Teste\MicroOndasDigital.Teste.csproj", "{65E4ED4E-408C-483D-9C0A-E588DB1AFD0A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,6 +37,10 @@ Global
 		{9DD0A909-D347-4526-B928-E8E6CD49F06B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9DD0A909-D347-4526-B928-E8E6CD49F06B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9DD0A909-D347-4526-B928-E8E6CD49F06B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{65E4ED4E-408C-483D-9C0A-E588DB1AFD0A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{65E4ED4E-408C-483D-9C0A-E588DB1AFD0A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{65E4ED4E-408C-483D-9C0A-E588DB1AFD0A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{65E4ED4E-408C-483D-9C0A-E588DB1AFD0A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -43,6 +49,7 @@ Global
 		{1CE43C84-1326-473B-B256-422E250FC12D} = {5EDB776D-D6B1-478A-91C7-1D208ABBCD24}
 		{F2DE0334-AA6B-4A1D-B39A-7214B3A6BB80} = {CC6D2AB9-D490-4CE8-B3AF-C6BB88A70CB9}
 		{9DD0A909-D347-4526-B928-E8E6CD49F06B} = {1421804D-43F8-498E-B665-B7175933EFBF}
+		{65E4ED4E-408C-483D-9C0A-E588DB1AFD0A} = {08E90DCC-DAF3-443E-A7B7-C3FA2FDA3FEB}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {439A9969-CDCB-4D1A-941F-59E58D1F29CF}

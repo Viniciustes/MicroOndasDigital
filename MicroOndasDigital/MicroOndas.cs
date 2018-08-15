@@ -7,8 +7,8 @@ namespace MicroOndasDigital
 {
     public partial class MicroOndas : Form
     {
+        int _tempo;
         private IServicoMicroOndas _servico;
-        int tempo = 10;
 
         public MicroOndas()
         {
@@ -42,7 +42,16 @@ namespace MicroOndasDigital
             }
 
             InstanciaServico(tempo, potencia);
-            lblMensagem.Text = _servico.Ligar(tempo, potencia);
+            var microOndasDigital = _servico.Ligar(tempo, potencia);
+
+            if (microOndasDigital.EhValido)
+            {
+                IniciarContagemPorTempo(microOndasDigital.Tempo);
+            }
+            else
+            {
+                lblMensagem.Text = microOndasDigital.Mensagem;
+            }
         }
 
         private void Btn_Pausar(object sender, EventArgs e)
@@ -53,14 +62,17 @@ namespace MicroOndasDigital
 
         private void Btn_Cancelar(object sender, EventArgs e)
         {
-            InstanciaServico();
-            _servico.Cancelar();
+            tmpTempo.Stop();
+            _tempo = 0;
+            lblMensagem.Text = string.Empty;
+            MessageBox.Show("Cozimento cancelado!");
         }
 
         private void Btn_InicioRapido(object sender, EventArgs e)
         {
             InstanciaServico();
-            _servico.InicioRapido();
+            var microOndasDigital = _servico.InicioRapido();
+            IniciarContagemPorTempo(microOndasDigital.Tempo);
         }
 
         private void TxtPotencia_KeyPress(object sender, KeyPressEventArgs e)
@@ -83,22 +95,22 @@ namespace MicroOndasDigital
 
         private void TmpTempo_Tick(object sender, EventArgs e)
         {
-            tempo--;
+            _tempo--;
 
-            lblMensagem.Text = Convert.ToString(tempo);
+            lblMensagem.Text = Convert.ToString(_tempo);
 
-            if (tempo == 0)
+            if (_tempo == 0)
             {
+                tmpTempo.Stop();
                 lblMensagem.Text = "Fim";
                 MessageBox.Show("Tempo Acabou");
-                tmpTempo.Stop();
             }
         }
 
-        private void MicroOndas_Load(object sender, EventArgs e)
+        private void IniciarContagemPorTempo(int tempo)
         {
+            _tempo = tempo;
             tmpTempo.Start();
-            tmpTempo.Interval = 1000;
         }
     }
 }

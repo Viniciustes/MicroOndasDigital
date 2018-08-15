@@ -118,6 +118,7 @@
             this.button1.TabIndex = 9;
             this.button1.Text = "Início Rápido";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.Btn_InicioRapido);
             // 
             // lblMensagem
             // 
@@ -129,6 +130,7 @@
             // 
             // tmpTempo
             // 
+            this.tmpTempo.Interval = 1000;
             this.tmpTempo.Tick += new System.EventHandler(this.TmpTempo_Tick);
             // 
             // txtPrograma
@@ -165,7 +167,6 @@
             this.Controls.Add(this.button_ligar);
             this.Name = "MicroOndas";
             this.Text = "Micro Ondas Digital";
-            this.Load += new System.EventHandler(this.MicroOndas_Load);
             this.Click += new System.EventHandler(this.Btn_InicioRapido);
             this.ResumeLayout(false);
             this.PerformLayout();

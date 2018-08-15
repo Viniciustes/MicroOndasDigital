@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Dtos\DtoMicroOndasDigital.cs" />
     <Compile Include="Interface\IServicoMicroOndas.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServicoMicroOndas.cs" />
