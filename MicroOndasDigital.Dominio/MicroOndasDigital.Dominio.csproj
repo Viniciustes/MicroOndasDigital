@@ -42,7 +42,7 @@
   <ItemGroup>
     <Compile Include="Interface\IMicroOndasDigital.cs" />
     <Compile Include="MicroOndasDigital.cs" />
-    <Compile Include="ProgramaAquecimento.cs" />
+    <Compile Include="TipoAquecimento.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

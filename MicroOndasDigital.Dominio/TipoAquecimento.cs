@@ -1,6 +1,6 @@
 ﻿namespace MicroOndasDigital.Dominio
 {
-    public class ProgramaAquecimento
+    public class TipoAquecimento
     {
         public int Id { get; set; }
 

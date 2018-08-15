@@ -1,5 +1,6 @@
 ﻿using MicroOndasDigital.Dominio.Interface;
 using System;
+using System.Collections.Generic;
 
 namespace MicroOndasDigital.Dominio
 {
@@ -7,7 +8,6 @@ namespace MicroOndasDigital.Dominio
     {
         public MicroOndasDigital()
         {
-
         }
 
         public MicroOndasDigital(int tempo, int potencia)
@@ -24,7 +24,9 @@ namespace MicroOndasDigital.Dominio
 
         public bool EhValido { get; private set; }
 
-        public string Mensagem { get; private set ; }
+        public string Mensagem { get; private set; }
+
+        public IList<TipoAquecimento> TiposAquecimentos { get; }
 
         public MicroOndasDigital InicioRapido()
         {
@@ -36,7 +38,7 @@ namespace MicroOndasDigital.Dominio
 
         public MicroOndasDigital Ligar(int tempo, int potencia)
         {
-            return this;
+            return new MicroOndasDigital(tempo, potencia);
         }
 
         public MicroOndasDigital Pausar()

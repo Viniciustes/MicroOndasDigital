@@ -107,7 +107,6 @@
             this.txtPotencia.Name = "txtPotencia";
             this.txtPotencia.Size = new System.Drawing.Size(100, 20);
             this.txtPotencia.TabIndex = 8;
-            this.txtPotencia.Text = "10";
             this.txtPotencia.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TxtPotencia_KeyPress);
             // 
             // button1
@@ -167,7 +166,7 @@
             this.Controls.Add(this.button_ligar);
             this.Name = "MicroOndas";
             this.Text = "Micro Ondas Digital";
-            this.Click += new System.EventHandler(this.Btn_InicioRapido);
+            this.Load += new System.EventHandler(this.MicroOndas_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

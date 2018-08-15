@@ -20,9 +20,9 @@ namespace MicroOndasDigital
             _servico = new ServicoMicroOndas();
         }
 
-        private void InstanciaServico(int tempo, int potencia)
+        private void MicroOndas_Load(object sender, EventArgs e)
         {
-            _servico = new ServicoMicroOndas(tempo, potencia);
+            txtPotencia.Text = Constantes.POTENCIA_PADRAO.ToString();
         }
 
         private void Btn_Ligar(object sender, EventArgs e)
@@ -31,17 +31,17 @@ namespace MicroOndasDigital
 
             if (!int.TryParse(txtTempo.Text, out tempo))
             {
-                lblMensagem.Text = "Valor do tempo incorreto.";
+                lblMensagem.Text = Constantes.VALOR_TEMPO_INCORRETO;
                 return;
             }
 
             if (!int.TryParse(txtPotencia.Text, out potencia))
             {
-                lblMensagem.Text = "Valor da potência incorreto.";
+                lblMensagem.Text = Constantes.VALOR_POTENCIA_INCORRETO;
                 return;
             }
 
-            InstanciaServico(tempo, potencia);
+            InstanciaServico();
             var microOndasDigital = _servico.Ligar(tempo, potencia);
 
             if (microOndasDigital.EhValido)
@@ -63,15 +63,18 @@ namespace MicroOndasDigital
         private void Btn_Cancelar(object sender, EventArgs e)
         {
             tmpTempo.Stop();
-            _tempo = 0;
-            lblMensagem.Text = string.Empty;
-            MessageBox.Show("Cozimento cancelado!");
+            MessageBox.Show(Constantes.COMIDA_CANCELADA);
+            ZerarCampos();
         }
 
         private void Btn_InicioRapido(object sender, EventArgs e)
         {
             InstanciaServico();
             var microOndasDigital = _servico.InicioRapido();
+
+            txtTempo.Text = microOndasDigital.Tempo.ToString();
+            txtPotencia.Text = microOndasDigital.Potencia.ToString();
+
             IniciarContagemPorTempo(microOndasDigital.Tempo);
         }
 
@@ -102,9 +105,18 @@ namespace MicroOndasDigital
             if (_tempo == 0)
             {
                 tmpTempo.Stop();
-                lblMensagem.Text = "Fim";
-                MessageBox.Show("Tempo Acabou");
+                lblMensagem.Text = Constantes.COMIDA_AQUECIDA;
+                MessageBox.Show(Constantes.COMIDA_PRONTA);
+                ZerarCampos();
             }
+        }
+
+        private void ZerarCampos()
+        {
+            lblMensagem.Text = string.Empty;
+            txtTempo.Text = string.Empty;
+            txtPotencia.Text = Constantes.POTENCIA_PADRAO.ToString();
+            _tempo = 0;
         }
 
         private void IniciarContagemPorTempo(int tempo)
