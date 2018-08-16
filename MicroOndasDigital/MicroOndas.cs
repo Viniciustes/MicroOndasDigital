@@ -10,6 +10,9 @@ namespace MicroOndasDigital
         int _tempo;
         private IServicoMicroOndas _servico;
 
+        //TODO: Parar de instanciar servico para toda ação
+        // Verificar listBox opçao em branco
+
         public MicroOndas()
         {
             InitializeComponent();
@@ -23,12 +26,37 @@ namespace MicroOndasDigital
         private void MicroOndas_Load(object sender, EventArgs e)
         {
             txtPotencia.Text = Constantes.POTENCIA_PADRAO.ToString();
+            PopularListBoxPrograma();
+        }
+
+        private void PopularListBoxPrograma()
+        {
+            listPrograma.ValueMember = "Id";
+            listPrograma.DisplayMember = "Nome";
+
+            InstanciaServico();
+            var listaProgramas = _servico.ListarTiposAquecimento();
+            listPrograma.DataSource = listaProgramas;
+            listPrograma.SelectedIndex = -1;
+        }
+
+        private void LigarMicroOndasPorPrograma(int idPrograma)
+        {
+            InstanciaServico();
+            var microOndasDigital = _servico.RecuperarPorPrograma(idPrograma);
+            IniciarContagemPorTempo(microOndasDigital.Tempo);
         }
 
         private void Btn_Ligar(object sender, EventArgs e)
         {
-            int tempo, potencia;
+            if (listPrograma.SelectedIndex != -1)
+            {
+                var idPrograma = (int)listPrograma.SelectedValue;
+                LigarMicroOndasPorPrograma(idPrograma);
+                return;
+            }
 
+            int tempo, potencia;
             if (!int.TryParse(txtTempo.Text, out tempo))
             {
                 lblMensagem.Text = Constantes.VALOR_TEMPO_INCORRETO;
@@ -41,7 +69,6 @@ namespace MicroOndasDigital
                 return;
             }
 
-            InstanciaServico();
             var microOndasDigital = _servico.Ligar(tempo, potencia);
 
             if (microOndasDigital.EhValido)
@@ -56,8 +83,16 @@ namespace MicroOndasDigital
 
         private void Btn_Pausar(object sender, EventArgs e)
         {
-            InstanciaServico();
-            _servico.Pausar();
+            if (button_pausar.Text == "Pausar")
+            {
+                tmpTempo.Stop();
+                button_pausar.Text = "Continuar";
+            }
+            else
+            {
+                tmpTempo.Start();
+                button_pausar.Text = "Pausar";
+            }
         }
 
         private void Btn_Cancelar(object sender, EventArgs e)
@@ -123,6 +158,19 @@ namespace MicroOndasDigital
         {
             _tempo = tempo;
             tmpTempo.Start();
+        }
+
+        private void ListPrograma_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if(listPrograma.SelectedIndex != -1)
+            {
+                InstanciaServico();
+                var idPrograma = (int)listPrograma.SelectedValue;
+                var programa = _servico.RecuperarPorPrograma(idPrograma);
+
+                txtPotencia.Text = programa.Potencia.ToString();
+                txtTempo.Text = programa.Tempo.ToString();
+            }
         }
     }
 }

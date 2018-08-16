@@ -39,8 +39,9 @@
             this.button1 = new System.Windows.Forms.Button();
             this.lblMensagem = new System.Windows.Forms.Label();
             this.tmpTempo = new System.Windows.Forms.Timer(this.components);
-            this.txtPrograma = new System.Windows.Forms.TextBox();
             this.lblPrograma = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.listPrograma = new System.Windows.Forms.ListBox();
             this.SuspendLayout();
             // 
             // button_ligar
@@ -122,22 +123,17 @@
             // lblMensagem
             // 
             this.lblMensagem.AutoSize = true;
-            this.lblMensagem.Location = new System.Drawing.Point(422, 101);
+            this.lblMensagem.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblMensagem.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.lblMensagem.Location = new System.Drawing.Point(310, 38);
             this.lblMensagem.Name = "lblMensagem";
-            this.lblMensagem.Size = new System.Drawing.Size(0, 13);
+            this.lblMensagem.Size = new System.Drawing.Size(0, 22);
             this.lblMensagem.TabIndex = 10;
             // 
             // tmpTempo
             // 
             this.tmpTempo.Interval = 1000;
             this.tmpTempo.Tick += new System.EventHandler(this.TmpTempo_Tick);
-            // 
-            // txtPrograma
-            // 
-            this.txtPrograma.Location = new System.Drawing.Point(293, 151);
-            this.txtPrograma.Name = "txtPrograma";
-            this.txtPrograma.Size = new System.Drawing.Size(100, 20);
-            this.txtPrograma.TabIndex = 11;
             // 
             // lblPrograma
             // 
@@ -148,13 +144,32 @@
             this.lblPrograma.TabIndex = 12;
             this.lblPrograma.Text = "Programa";
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(399, 85);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(55, 13);
+            this.label1.TabIndex = 13;
+            this.label1.Text = "Segundos";
+            // 
+            // listPrograma
+            // 
+            this.listPrograma.FormattingEnabled = true;
+            this.listPrograma.Location = new System.Drawing.Point(296, 154);
+            this.listPrograma.Name = "listPrograma";
+            this.listPrograma.Size = new System.Drawing.Size(97, 95);
+            this.listPrograma.TabIndex = 14;
+            this.listPrograma.SelectedIndexChanged += new System.EventHandler(this.ListPrograma_SelectedIndexChanged);
+            // 
             // MicroOndas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(883, 450);
+            this.Controls.Add(this.listPrograma);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.lblPrograma);
-            this.Controls.Add(this.txtPrograma);
             this.Controls.Add(this.lblMensagem);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.txtPotencia);
@@ -184,8 +199,9 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label lblMensagem;
         private System.Windows.Forms.Timer tmpTempo;
-        private System.Windows.Forms.TextBox txtPrograma;
         private System.Windows.Forms.Label lblPrograma;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ListBox listPrograma;
     }
 }
 

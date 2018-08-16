@@ -1,6 +1,6 @@
 ﻿using MicroOndasDigital.Dominio.Interface;
-using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace MicroOndasDigital.Dominio
 {
@@ -26,14 +26,24 @@ namespace MicroOndasDigital.Dominio
 
         public string Mensagem { get; private set; }
 
-        public IList<TipoAquecimento> TiposAquecimentos { get; }
-
         public MicroOndasDigital InicioRapido()
         {
-            var tempo = 30;
-            var potencia = 8;
+            return new MicroOndasDigital(Constantes.TEMPO_RAPIDO, Constantes.POTENCIA_RAPIDA);
+        }
 
-            return new MicroOndasDigital(tempo, potencia);
+        public IList<TipoAquecimento> ListarTiposAquecimento()
+        {
+            // Essas informações poderia vim de uma fonte externa como um banco de dados.
+            var tiposAquecimento = new List<TipoAquecimento>
+            {
+                new TipoAquecimento { Id = 1, Nome = "Assar Frango", Potencia = 2, Tempo = 7 },
+                new TipoAquecimento { Id = 2, Nome = "Cozinhar Carne", Potencia = 4, Tempo = 9 },
+                new TipoAquecimento { Id = 3, Nome = "Estourar Pipoca", Potencia = 7, Tempo = 8 },
+                new TipoAquecimento { Id = 4, Nome = "Miojo", Potencia = 9, Tempo = 4 },
+                new TipoAquecimento { Id = 5, Nome = "Fritar Ovo", Potencia = 3, Tempo = 2 }
+            };
+
+            return tiposAquecimento;
         }
 
         public MicroOndasDigital Ligar(int tempo, int potencia)
@@ -41,26 +51,26 @@ namespace MicroOndasDigital.Dominio
             return new MicroOndasDigital(tempo, potencia);
         }
 
-        public MicroOndasDigital Pausar()
-        {
-            throw new NotImplementedException();
-        }
-
         private void Validacoes()
         {
             if (Tempo < 1 || Tempo > 120)
             {
-                Mensagem = "Tempo deve ser no mínimo 1 segundo ou no máximo 2 minutos.";
+                Mensagem = Constantes.LIMITE_TEMPO;
                 return;
             }
 
             if (Potencia < 1 || Potencia > 10)
             {
-                Mensagem = "Potência deve ser no mínimo 1 ou no máximo 10.";
+                Mensagem = Constantes.LIMITE_POTENCIA; ;
                 return;
             }
 
             EhValido = true;
+        }
+
+        public TipoAquecimento RecuperarPorPrograma(int idPrograma)
+        {
+           return ListarTiposAquecimento().Where(x => x.Id == idPrograma).FirstOrDefault();
         }
     }
 }
