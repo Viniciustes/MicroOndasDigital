@@ -7,6 +7,7 @@
         public const string COMIDA_CANCELADA = "Cozimento cancelado!";
         public const string VALOR_TEMPO_INCORRETO = "Valor do tempo incorreto!";
         public const string VALOR_POTENCIA_INCORRETO = "Valor da potência incorreto!";
+        public const string VALOR_PROGRAMA_INCORRETO = "Valor do programa incorreto!";
         public const string COMIDA_AQUECIDA = "Aquecida.";
     }
 }

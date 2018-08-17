@@ -80,5 +80,35 @@ namespace MicroOndasDigital.Teste.DominioTestes
             Assert.AreEqual(30, resultTrue.Tempo);
             Assert.AreEqual(8, resultTrue.Potencia);
         }
+
+        //[TestMethod]
+        //public void NaoPodeCadastarTipoAquecimentoComTempoSuperiorAoPermitido
+        //{
+
+        //}
+
+        //[TestMethod]
+        //public void NaoPodeCadastarTipoAquecimentoComTempoInferiorAoPermitido
+        //{
+
+        //}
+
+        //[TestMethod]
+        //public void NaoPodeCadastarTipoAquecimentoComPotenciaSuperiorAoPermitido
+        //{
+
+        //}
+
+        //[TestMethod]
+        //public void NaoPodeCadastarTipoAquecimentoComPotenciaInferiorAoPermitido
+        //{
+
+        //}
+
+        //[TestMethod]
+        //public void NaoPodeCadastarTipoAquecimentoSemNome
+        //{
+
+        //}
     }
 }

@@ -1,6 +1,8 @@
 ﻿using MicroOndasDigital.Servico;
+using MicroOndasDigital.Servico.Dtos;
 using MicroOndasDigital.Servico.Interface;
 using System;
+using System.ComponentModel;
 using System.Windows.Forms;
 
 namespace MicroOndasDigital
@@ -8,10 +10,7 @@ namespace MicroOndasDigital
     public partial class MicroOndas : Form
     {
         int _tempo;
-        private IServicoMicroOndas _servico;
-
-        //TODO: Parar de instanciar servico para toda ação
-        // Verificar listBox opçao em branco
+        private IServico _servico;
 
         public MicroOndas()
         {
@@ -20,24 +19,26 @@ namespace MicroOndasDigital
 
         private void InstanciaServico()
         {
-            _servico = new ServicoMicroOndas();
+            _servico = new Servico.Servico();
         }
 
         private void MicroOndas_Load(object sender, EventArgs e)
         {
             txtPotencia.Text = Constantes.POTENCIA_PADRAO.ToString();
             PopularListBoxPrograma();
+            ZerarCampos();
         }
 
         private void PopularListBoxPrograma()
         {
-            listPrograma.ValueMember = "Id";
-            listPrograma.DisplayMember = "Nome";
-
             InstanciaServico();
             var listaProgramas = _servico.ListarTiposAquecimento();
-            listPrograma.DataSource = listaProgramas;
-            listPrograma.SelectedIndex = -1;
+
+            cmbPrograma.DataSource = null;
+            cmbPrograma.ValueMember = "Id";
+            cmbPrograma.DisplayMember = "Nome";
+            cmbPrograma.DataSource = listaProgramas;
+            cmbPrograma.SelectedIndex = -1;
         }
 
         private void LigarMicroOndasPorPrograma(int idPrograma)
@@ -49,9 +50,9 @@ namespace MicroOndasDigital
 
         private void Btn_Ligar(object sender, EventArgs e)
         {
-            if (listPrograma.SelectedIndex != -1)
+            if (cmbPrograma.SelectedIndex != -1)
             {
-                var idPrograma = (int)listPrograma.SelectedValue;
+                var idPrograma = (int)cmbPrograma.SelectedValue;
                 LigarMicroOndasPorPrograma(idPrograma);
                 return;
             }
@@ -136,6 +137,12 @@ namespace MicroOndasDigital
             _tempo--;
 
             lblMensagem.Text = Convert.ToString(_tempo);
+            lblPonto.Visible = true;
+
+            var potencia = Convert.ToInt16(txtPotencia.Text);
+            var ponto = new string('.', potencia);
+
+            lblPonto.Text = lblPonto.Text + ponto;
 
             if (_tempo == 0)
             {
@@ -152,6 +159,8 @@ namespace MicroOndasDigital
             txtTempo.Text = string.Empty;
             txtPotencia.Text = Constantes.POTENCIA_PADRAO.ToString();
             _tempo = 0;
+            cmbPrograma.SelectedIndex = -1;
+            lblPonto.Text = string.Empty;
         }
 
         private void IniciarContagemPorTempo(int tempo)
@@ -160,17 +169,38 @@ namespace MicroOndasDigital
             tmpTempo.Start();
         }
 
-        private void ListPrograma_SelectedIndexChanged(object sender, EventArgs e)
+        private void CmbPrograma_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if(listPrograma.SelectedIndex != -1)
+            if (cmbPrograma.SelectedIndex != -1)
             {
                 InstanciaServico();
-                var idPrograma = (int)listPrograma.SelectedValue;
+                var idPrograma = (int)cmbPrograma.SelectedValue;
                 var programa = _servico.RecuperarPorPrograma(idPrograma);
 
                 txtPotencia.Text = programa.Potencia.ToString();
                 txtTempo.Text = programa.Tempo.ToString();
             }
+        }
+
+        private void Cmb_Programa(object sender, EventArgs e)
+        {
+            if (cmbPrograma.SelectedIndex == -1)
+            {
+                ZerarCampos();
+            }
+        }
+
+        private void BtnAdicionarPrograma_Click(object sender, EventArgs e)
+        {
+            var adicionarPrograma = new AdicionarPrograma();
+            adicionarPrograma.FormClosing += new FormClosingEventHandler(SaindoFormAdicionarProgramas);
+            adicionarPrograma.Show();
+        }
+
+        private void SaindoFormAdicionarProgramas(object sender, FormClosingEventArgs e)
+        {
+            PopularListBoxPrograma();
+            ZerarCampos();
         }
     }
 }
